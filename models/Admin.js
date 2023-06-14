@@ -1,9 +1,9 @@
-const { Model, DataTypes } = require("sequelize");
 const bcrypt = require("bcryptjs");
+const { Model, DataTypes } = require("sequelize");
 
-class User extends Model {
+class Admin extends Model {
   static initModel(sequelize) {
-    User.init(
+    Admin.init(
       {
         id: {
           type: DataTypes.BIGINT.UNSIGNED,
@@ -23,38 +23,32 @@ class User extends Model {
         password: {
           type: DataTypes.STRING,
         },
-        adress: {
-          type: DataTypes.STRING,
-        },
-        phone: {
-          type: DataTypes.STRING,
-        },
       },
       {
         sequelize,
-        modelName: "User",
+        modelName: "Admin",
         hooks: {
-          beforeCreate: async (user) => {
+          beforeCreate: async (admin) => {
             // Solo hashear la contraseña si ha sido modificada o es nueva
-            if (user.changed("password")) {
+            if (admin.changed("password")) {
               try {
                 // Hashear la contraseña
-                const hashedPassword = await bcrypt.hash(user.password, 10);
+                const hashedPassword = await bcrypt.hash(admin.password, 10);
                 // Reemplazar la contraseña en texto plano por la contraseña hasheada
-                user.password = hashedPassword;
+                admin.password = hashedPassword;
               } catch (error) {
                 throw error;
               }
             }
           },
-          beforeUpdate: async (user) => {
+          beforeUpdate: async (admin) => {
             // Solo hashear la contraseña si ha sido modificada
-            if (user.changed("password")) {
+            if (admin.changed("password")) {
               try {
                 // Hashear la contraseña
-                const hashedPassword = await bcrypt.hash(user.password, 10);
+                const hashedPassword = await bcrypt.hash(admin.password, 10);
                 // Reemplazar la contraseña en texto plano por la contraseña hasheada
-                user.password = hashedPassword;
+                admin.password = hashedPassword;
               } catch (error) {
                 throw error;
               }
@@ -64,8 +58,8 @@ class User extends Model {
       },
     );
 
-    return User;
+    return Admin;
   }
 }
 
-module.exports = User;
+module.exports = Admin;
