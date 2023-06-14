@@ -11,14 +11,11 @@ class Cart extends Model {
           type: DataTypes.DECIMAL,
         },
         state: {
-          type: DataTypes.STRING,
+          type: DataTypes.ENUM("sin pagar", "pago", "enviado", "entregado"),
           allowNull: false,
           defaultValue: "sin pagar",
-          validate: {
-            isIn: [["sin pagar", "pago", "enviado", "entregado"]],
-          },
         },
-        adress: {
+        address: {
           type: DataTypes.STRING,
         },
       },

@@ -9,25 +9,32 @@ class User extends Model {
           type: DataTypes.BIGINT.UNSIGNED,
           primaryKey: true,
           autoIncrement: true,
+          required: true,
         },
         firstname: {
           type: DataTypes.STRING,
+          required: true,
         },
         lastname: {
           type: DataTypes.STRING,
+          required: true,
         },
         email: {
           type: DataTypes.STRING,
           unique: true,
+          required: true,
         },
         password: {
           type: DataTypes.STRING,
+          required: true,
         },
-        adress: {
+        address: {
           type: DataTypes.STRING,
+          required: true,
         },
         phone: {
           type: DataTypes.STRING,
+          required: true,
         },
       },
       {

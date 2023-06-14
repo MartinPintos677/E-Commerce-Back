@@ -23,31 +23,13 @@ Category.initModel(sequelize);
 Product.initModel(sequelize);
 Cart.initModel(sequelize);
 
-/**
- * Luego de definir los modelos, se pueden establecer relaciones entre los
- * mismos (usando métodos como belongsTo, hasMany y belongsToMany)...
- */
 // Relación 1 a N: Category tiene una relación 1 a N con Product
-Category.hasMany(Product, { foreignKey: "categoryId" });
-Product.belongsTo(Category, { foreignKey: "categoryId" });
-
-// Relación N a N: Product tiene una relación N a N con Cart
-Product.belongsToMany(Cart, {
-  through: "CartProduct",
-  foreignKey: "productId",
-  otherKey: "cartId",
-  onDelete: "CASCADE",
-});
-Cart.belongsToMany(Product, {
-  through: "CartProduct",
-  foreignKey: "cartId",
-  otherKey: "productId",
-  onDelete: "CASCADE",
-});
+Category.hasMany(Product);
+Product.belongsTo(Category);
 
 // Relación N a 1: Cart tiene una relación N a 1 con User
-Cart.belongsTo(User, { foreignKey: "compradorId" });
-User.hasMany(Cart, { foreignKey: "compradorId" });
+Cart.belongsTo(User);
+User.hasMany(Cart);
 
 module.exports = {
   sequelize,

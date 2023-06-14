@@ -12,16 +12,20 @@ class Admin extends Model {
         },
         firstname: {
           type: DataTypes.STRING,
+          required: true,
         },
         lastname: {
           type: DataTypes.STRING,
+          required: true,
         },
         email: {
           type: DataTypes.STRING,
           unique: true,
+          required: true,
         },
         password: {
           type: DataTypes.STRING,
+          required: true,
         },
       },
       {

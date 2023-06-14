@@ -8,23 +8,18 @@ class Product extends Model {
           type: DataTypes.BIGINT.UNSIGNED,
           primaryKey: true,
           autoIncrement: true,
+          required: true,
         },
         name: {
           type: DataTypes.STRING,
+          required: true,
         },
         description: {
           type: DataTypes.STRING,
+          required: true,
         },
-        avatar: {
-          type: DataTypes.TEXT("long"),
-          get() {
-            const rawValue = this.getDataValue("avatar");
-            return rawValue ? JSON.parse(rawValue) : [];
-          },
-          set(value) {
-            const serializedValue = value ? JSON.stringify(value) : "[]";
-            this.setDataValue("avatar", serializedValue);
-          },
+        image: {
+          type: DataTypes.STRING,
         },
         price: {
           type: DataTypes.DECIMAL,
