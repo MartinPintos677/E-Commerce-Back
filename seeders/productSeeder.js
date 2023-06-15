@@ -9,7 +9,7 @@ const productsMueblesData = [
     stock: 10,
     salient: true,
     slug: "silla-de-comedor",
-    image: path.join(__dirname, "..public/img/Mueble4"),
+    image: "Mueble4",
   },
   {
     name: "Sillón",
@@ -18,7 +18,7 @@ const productsMueblesData = [
     stock: 6,
     salient: false,
     slug: "silla-de-comedor",
-    image: path.join(__dirname, "..public/img/Mueble5"),
+    image: "Mueble5",
   },
   {
     name: "Silla Alta",
@@ -27,7 +27,7 @@ const productsMueblesData = [
     stock: 10,
     salient: true,
     slug: "silla-alta",
-    image: path.join(__dirname, "..public/img/Mueble2"),
+    image: "Mueble2",
   },
 ];
 
@@ -39,7 +39,7 @@ const productsEspejoData = [
     stock: 20,
     salient: false,
     slug: "espejo-cuadrado",
-    image: path.join(__dirname, "..public/img/Espejo1"),
+    image: "Espejo1",
   },
   {
     name: "Espejo redondo",
@@ -48,7 +48,7 @@ const productsEspejoData = [
     stock: 5,
     salient: false,
     slug: "espejo-redondo-marco-dorado",
-    image: path.join(__dirname, "..public/img/Espejo4"),
+    image: "Espejo4",
   },
   {
     name: "Espejo grande",
@@ -57,7 +57,7 @@ const productsEspejoData = [
     stock: 5,
     salient: true,
     slug: "espejo-grande-marco-dorado",
-    image: path.join(__dirname, "..public/img/Espejo5"),
+    image: "Espejo5",
   },
 ];
 
@@ -69,7 +69,7 @@ const productsCuadrosData = [
     stock: 20,
     salient: false,
     slug: "cuadro-rectangular",
-    image: path.join(__dirname, "..public/img/Cuadro2"),
+    image: "Cuadro2",
   },
   {
     name: "Cuadros",
@@ -78,7 +78,7 @@ const productsCuadrosData = [
     stock: 5,
     salient: false,
     slug: "cuadros-modernos",
-    image: path.join(__dirname, "..public/img/Cuadro3"),
+    image: "Cuadro3",
   },
   {
     name: "Cuadro abstracto",
@@ -87,7 +87,7 @@ const productsCuadrosData = [
     stock: 5,
     salient: true,
     slug: "cuadro-abstracto-colores-vivos",
-    image: path.join(__dirname, "..public/img/Cuadro1"),
+    image: "Cuadro1",
   },
 ];
 
@@ -99,7 +99,7 @@ const productsLuminariasData = [
     stock: 15,
     salient: false,
     slug: "lampara-de-techo",
-    image: path.join(__dirname, "..public/img/Luminaria2"),
+    image: "Luminaria2",
   },
   {
     name: "Lámparas de techo",
@@ -108,7 +108,7 @@ const productsLuminariasData = [
     stock: 5,
     salient: false,
     slug: "lamparas-techo-chicas",
-    image: path.join(__dirname, "..public/img/Luminaria5"),
+    image: "Luminaria5",
   },
   {
     name: "Lámpara de techo",
@@ -117,7 +117,7 @@ const productsLuminariasData = [
     stock: 5,
     salient: true,
     slug: "cuadro-abstracto-colores-vivos",
-    image: path.join(__dirname, "..public/img/Cuadro1"),
+    image: "Cuadro1",
   },
 ];
 
@@ -129,7 +129,7 @@ const productsTapicesData = [
     stock: 8,
     salient: false,
     slug: "tapiz-decorativo",
-    image: path.join(__dirname, "..public/img/Tapiz5"),
+    image: "Tapiz5",
   },
   {
     name: "Tapiz",
@@ -138,7 +138,7 @@ const productsTapicesData = [
     stock: 5,
     salient: true,
     slug: "tapiz-blanco",
-    image: path.join(__dirname, "..public/img/Tapiz4"),
+    image: "Tapiz4",
   },
   {
     name: "Tapiz moderno",
@@ -147,7 +147,7 @@ const productsTapicesData = [
     stock: 5,
     salient: true,
     slug: "tapiz-moderno-blanco",
-    image: path.join(__dirname, "..public/img/Tapiz1"),
+    image: "Tapiz1",
   },
 ];
 
