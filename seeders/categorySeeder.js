@@ -10,22 +10,22 @@ const categoriesData = [
   {
     name: "Espejos",
     description: "Categoría de espejos",
-    image: path.join(__dirname, "..public/img/espejo5"),
+    image: "espejo5",
   },
   {
     name: "Cuadros",
     description: "Categoría de cuadros",
-    image: path.join(__dirname, "..public/img/Cuadro1"),
+    image: "Cuadro1",
   },
   {
     name: "Luminarias",
     description: "Categoría de luminarias",
-    image: path.join(__dirname, "..public/img/Luminaria2"),
+    image: "Luminaria2",
   },
   {
     name: "Tapices",
     description: "Categoría de tapices",
-    image: path.join(__dirname, "..public/img/Tapiz4"),
+    image: "Tapiz4",
   },
 ];
 
