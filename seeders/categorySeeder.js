@@ -5,7 +5,7 @@ const categoriesData = [
   {
     name: "Muebles",
     description: "Categoría de muebles",
-    image: path.join(__dirname, "..public/img/mueble5"),
+    image: "mueble5.jpg",
   },
   {
     name: "Espejos",
