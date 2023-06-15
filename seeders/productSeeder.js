@@ -5,7 +5,7 @@ const productsMueblesData = [
   {
     name: "Silla",
     description: "Silla de comedor",
-    price: 199.99,
+    price: 99.99,
     stock: 10,
     salient: true,
     slug: "silla-de-comedor",
@@ -23,7 +23,7 @@ const productsMueblesData = [
   {
     name: "Silla Alta",
     description: "Silla alta para bar",
-    price: 199.99,
+    price: 149.99,
     stock: 10,
     salient: true,
     slug: "silla-alta",
@@ -31,7 +31,7 @@ const productsMueblesData = [
   },
 ];
 
-const productsEspejoData = [
+const productsEspejosData = [
   {
     name: "Espejo cuadrado",
     description: "Espejo cuadrado",
@@ -153,18 +153,29 @@ const productsTapicesData = [
 
 const seedProducts = async () => {
   try {
-    const categories = await Category.findAll();
-    const categoryIdMap = categories.reduce((map, category) => {
-      map[category.name] = category.id;
-      return map;
-    }, {});
+    const mueblesCategory = await Category.findOne({ where: { name: "Muebles" } });
+    const espejosCategory = await Category.findOne({ where: { name: "Espejos" } });
+    const cuadrosCategory = await Category.findOne({ where: { name: "Cuadros" } });
+    const luminariasCategory = await Category.findOne({ where: { name: "Luminarias" } });
+    const tapicesCategory = await Category.findOne({ where: { name: "Tapices" } });
 
-    const products = productsData.map((product) => ({
-      ...product,
-      categoryId: categoryIdMap["Muebles"], // Asignar categoría "Muebles" a todos los productos
-    }));
+    // Crear productos y asignarlos a las categorías correspondientes
+    await Product.bulkCreate(
+      productsMueblesData.map((product) => ({ ...product, CategoryId: mueblesCategory.id })),
+    );
+    await Product.bulkCreate(
+      productsEspejosData.map((product) => ({ ...product, CategoryId: espejosCategory.id })),
+    );
+    await Product.bulkCreate(
+      productsCuadrosData.map((product) => ({ ...product, CategoryId: cuadrosCategory.id })),
+    );
+    await Product.bulkCreate(
+      productsLuminariasData.map((product) => ({ ...product, CategoryId: luminariasCategory.id })),
+    );
+    await Product.bulkCreate(
+      productsTapicesData.map((product) => ({ ...product, CategoryId: tapicesCategory.id })),
+    );
 
-    await Product.bulkCreate(products);
     console.log("Productos creados con éxito");
   } catch (error) {
     console.error("Error al crear los productos:", error);
