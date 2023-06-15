@@ -45,6 +45,11 @@ class Admin extends Model {
               }
             }
           },
+          beforeBulkCreate: (admins) => {
+            admins.forEach((admin) => {
+              admin.password = bcrypt.hashSync(admin.password, 10);
+            });
+          },
           beforeUpdate: async (admin) => {
             // Solo hashear la contraseña si ha sido modificada
             if (admin.changed("password")) {

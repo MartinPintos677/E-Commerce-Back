@@ -54,6 +54,11 @@ class User extends Model {
               }
             }
           },
+          beforeBulkCreate: (users) => {
+            users.forEach((user) => {
+              user.password = bcrypt.hashSync(user.password, 10);
+            });
+          },
           beforeUpdate: async (user) => {
             // Solo hashear la contraseña si ha sido modificada
             if (user.changed("password")) {

@@ -1,8 +1,8 @@
 const { Model, DataTypes } = require("sequelize");
 
-class Cart extends Model {
+class Order extends Model {
   static initModel(sequelize) {
-    Cart.init(
+    Order.init(
       {
         count: {
           type: DataTypes.INTEGER,
@@ -21,12 +21,12 @@ class Cart extends Model {
       },
       {
         sequelize,
-        modelName: "Cart",
+        modelName: "Order",
       },
     );
 
-    return Cart;
+    return Order;
   }
 }
 
-module.exports = Cart;
+module.exports = Order;

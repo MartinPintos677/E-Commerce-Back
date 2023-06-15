@@ -1,36 +1,31 @@
-/**
- * El seeder no es más que un archivo que contiene una función que se encarga
- * de insertar datos (generalmente de prueba) en una base de datos.
- *
- * El nombre "seeder" es una convención y significa "semillero".
- *
- * Además, en este caso, se está usando una librería llamada Faker
- * (https://fakerjs.dev/) para facilitar la creación de datos ficticios como
- * nombres, apellidos, títulos, direcciones y demás textos.
- *
- * Suele ser común que en los seeders exista un `for` donde se define la
- * cantidad de registros de prueba que se insertarán en la base de datos.
- * En este ejemplo se están insertando 500 artículos con textos ficticios.
- *
- *
- */
+const { User } = require("../models");
 
-/*const { faker } = require("@faker-js/faker");
-const { Article, User } = require("../models");
+const users = [
+  {
+    firstname: "Jorge",
+    lastname: "Perez",
+    email: "jorgeperez@gmail.com",
+    address: "Av 18 de julio 1722",
+    phone: 123456789,
+    password: "123",
+  },
+  {
+    firstname: "Maria",
+    lastname: "López",
+    email: "marialopez@gmail.com",
+    address: "Av 18 de julio 1823",
+    phone: 987654321,
+    password: "123",
+  },
+];
 
-faker.locale = "es";
-
-module.exports = async () => {
-  const users = [];
-
-  for (let i = 0; i < 50; i++) {
-    users.push({
-      firstname: faker.name.firstName(),
-      lastname: faker.name.lastName(),
-      email: faker.internet.email(),
-    });
+const seedUsers = async () => {
+  try {
+    await User.bulkCreate(users);
+    console.log("Usuarios creados con éxito");
+  } catch (error) {
+    console.error("Error al crear los usuarios:", error);
   }
+};
 
-  await User.bulkCreate(users);
-  console.log("[Database] Se corrió el seeder de Users.");
-};*/
+module.exports = seedUsers();
