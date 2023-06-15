@@ -1,13 +1,15 @@
 const { Product, Category } = require("../models");
+const path = require("path");
 
 const productsData = [
   {
-    name: "Mesa de comedor",
+    name: "Silla",
     description: "Mesa de comedor de madera",
     price: 199.99,
     stock: 10,
     salient: true,
     slug: "mesa-de-comedor",
+    image: path.join(__dirname, "..public/img/mueble5"),
   },
   {
     name: "Espejo rectangular",
