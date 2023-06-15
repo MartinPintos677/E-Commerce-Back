@@ -19,7 +19,7 @@ class Product extends Model {
           required: true,
         },
         image: {
-          type: DataTypes.STRING,
+          type: DataTypes.TEXT,
         },
         price: {
           type: DataTypes.DECIMAL,
