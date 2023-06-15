@@ -8,6 +8,27 @@ const admins = [
     address: "Av 18 de julio 1431",
     password: "123",
   },
+  {
+    firstname: "Martin",
+    lastname: "Pintos",
+    email: "martin.pintos@gmail.com",
+    address: "Av 18 de julio 1432",
+    password: "123",
+  },
+  {
+    firstname: "Martin",
+    lastname: "Grillo",
+    email: "martin.grillo@gmail.com",
+    address: "Av 18 de julio 1433",
+    password: "123",
+  },
+  {
+    firstname: "Alex",
+    lastname: "Garcia",
+    email: "alex.garcia@gmail.com",
+    address: "Av 18 de julio 1434",
+    password: "123",
+  },
 ];
 
 const seedAdmin = async () => {

@@ -17,6 +17,22 @@ const users = [
     phone: 987654321,
     password: "123",
   },
+  {
+    firstname: "Victoria",
+    lastname: "Martinez",
+    email: "victoriamartinez@gmail.com",
+    address: "Av 18 de julio 1825",
+    phone: 123654789,
+    password: "123",
+  },
+  {
+    firstname: "Pablo",
+    lastname: "Pérez",
+    email: "pabloperez@gmail.com",
+    address: "Av 18 de julio 1923",
+    phone: 789654123,
+    password: "123",
+  },
 ];
 
 const seedUsers = async () => {
