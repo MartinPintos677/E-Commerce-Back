@@ -4,11 +4,8 @@ class Order extends Model {
   static initModel(sequelize) {
     Order.init(
       {
-        count: {
-          type: DataTypes.INTEGER,
-        },
-        price: {
-          type: DataTypes.DECIMAL,
+        products: {
+          type: DataTypes.JSON,
         },
         state: {
           type: DataTypes.ENUM("sin pagar", "pago", "enviado", "entregado"),

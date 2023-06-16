@@ -1,5 +1,4 @@
 const { Category } = require("../models");
-const path = require("path");
 
 const categoriesData = [
   {

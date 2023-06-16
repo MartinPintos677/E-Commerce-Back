@@ -1,5 +1,4 @@
 const { Product, Category } = require("../models");
-const path = require("path");
 
 const productsMueblesData = [
   {
