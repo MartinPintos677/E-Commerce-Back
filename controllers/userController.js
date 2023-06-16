@@ -16,9 +16,18 @@ async function login(req, res) {
       return res.status(401).json({ message: "Incorrect credentials" });
     }
 
-    const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET_KEY, { expiresIn: "10h" });
+    if (user) {
+      chekPass = await bcrypt.compare(req.body.password, user.password);
 
-    return res.status(201).json(user);
+      if (chekPass) {
+        const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET_KEY, {
+          expiresIn: "10h",
+        });
+        user._doc.token = token;
+
+        return res.status(201).json(user);
+      }
+    }
   } catch (error) {
     console.error(error);
     return res.status(401).json({ message: "Internal server error" });
@@ -45,10 +54,6 @@ async function signUp(req, res) {
       phone,
     });
 
-    /*const token = jwt.sign({ userId: newUser.id }, process.env.JWT_SECRET_KEY, {
-      expiresIn: "10h",
-    });*/
-
     return res.status(201).json(newUser);
   } catch (error) {
     console.error(error);
@@ -69,7 +74,7 @@ async function logout(req, res) {
 
 async function getOrders(req, res) {
   try {
-    const userId = req.user.userId; // Assuming you have middleware to extract the user ID from the token
+    const userId = req.user.userId;
 
     const user = await User.findByPk(userId, { include: Order });
 
