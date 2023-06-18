@@ -11,15 +11,14 @@ async function login(req, res) {
       return res.status(401).json({ message: "Incorrect credentials" });
     }
 
-    const isPasswordValid = await bcrypt.compare(password, user.password);
-    if (!isPasswordValid) {
-      return res.status(401).json({ message: "Incorrect credentials" });
-    }
-
     if (user) {
-      chekPass = await bcrypt.compare(req.body.password, user.password);
+      const isPasswordValid = await bcrypt.compare(password, user.password);
 
-      if (chekPass) {
+      if (!isPasswordValid) {
+        return res.status(401).json({ message: "Incorrect credentials" });
+      }
+
+      if (isPasswordValid) {
         const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET_KEY, {
           expiresIn: "10h",
         });
@@ -104,7 +103,7 @@ async function store(req, res) {}
 // Show the form for editing the specified resource.
 async function edit(req, res) {}
 
-// Update the specified resource in storage.
+// Update the specified resource in storage. // SIGN UP ?
 async function update(req, res) {}
 
 // Remove the specified resource from storage.

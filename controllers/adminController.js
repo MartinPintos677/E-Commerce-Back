@@ -11,18 +11,21 @@ async function login(req, res) {
       return res.status(401).json({ message: "Incorrect credentials" });
     }
 
-    const isPasswordValid = await bcrypt.compare(password, admin.password);
-    if (!isPasswordValid) {
-      return res.status(401).json({ message: "Incorrect credentials" });
-    }
+    if (admin) {
+      const isPasswordValid = await bcrypt.compare(password, admin.password);
 
-    if (chekPass) {
-      const token = jwt.sign({ userId: admin.id }, process.env.JWT_SECRET_KEY, {
-        expiresIn: "10h",
-      });
-      admin._doc.token = token;
+      if (!isPasswordValid) {
+        return res.status(401).json({ message: "Incorrect credentials" });
+      }
 
-      return res.status(201).json(admin);
+      if (isPasswordValid) {
+        const token = jwt.sign({ userId: admin.id }, process.env.JWT_SECRET_KEY, {
+          expiresIn: "10h",
+        });
+        admin._doc.token = token;
+
+        return res.status(201).json(admin);
+      }
     }
   } catch (error) {
     console.error(error);
@@ -30,7 +33,7 @@ async function login(req, res) {
   }
 }
 
-async function signUp(req, res) {
+async function store(req, res) {
   try {
     const { firstname, lastname, email, password } = req.body;
     const existingAdmin = await Admin.findOne({ where: { email } });
@@ -82,25 +85,101 @@ async function getAllOrders(req, res) {
 }
 
 // Display a listing of the resource.
-async function index(req, res) {}
+async function index(req, res) {
+  try {
+    const admins = await Admin.findAll();
+    return res.status(200).json(admins);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+}
 
 // Display the specified resource.
-async function show(req, res) {}
+async function show(req, res) {
+  try {
+    const { id } = req.params;
+    const admin = await Admin.findByPk(id);
+
+    if (!admin) {
+      return res.status(404).json({ message: "Admin not found" });
+    }
+
+    return res.status(200).json(admin);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+}
 
 // Show the form for creating a new resource
-async function create(req, res) {}
+async function create(req, res) {
+  res.render("admin.create.ruta"); // ir a la Ruta de SignUp
+}
 
 // Store a newly created resource in storage.
-async function store(req, res) {}
+//async function store(req, res) {} // // SIGN UP ?
 
 // Show the form for editing the specified resource.
-async function edit(req, res) {}
+async function edit(req, res) {
+  try {
+    const { id } = req.params;
+    const admin = await Admin.findByPk(id);
+
+    if (!admin) {
+      return res.status(404).json({ message: "Admin not found" });
+    }
+
+    return res.status(200).json(admin);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+}
 
 // Update the specified resource in storage.
-async function update(req, res) {}
+async function update(req, res) {
+  try {
+    const { id } = req.params;
+    const { firstname, lastname, email, password } = req.body;
+    const admin = await Admin.findByPk(id);
+
+    if (!admin) {
+      return res.status(404).json({ message: "Admin not found" });
+    }
+
+    admin.firstname = firstname;
+    admin.lastname = lastname;
+    admin.email = email;
+    admin.password = await bcrypt.hash(password, 10);
+
+    await admin.save();
+
+    return res.status(200).json(admin);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+}
 
 // Remove the specified resource from storage.
-async function destroy(req, res) {}
+async function destroy(req, res) {
+  try {
+    const { id } = req.params;
+    const admin = await Admin.findByPk(id);
+
+    if (!admin) {
+      return res.status(404).json({ message: "Admin not found" });
+    }
+
+    await admin.destroy();
+
+    return res.status(204).json({ message: "Admin deleted successfully" });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+}
 
 // Otros handlers...
 // ...
@@ -114,7 +193,6 @@ module.exports = {
   update,
   destroy,
   login,
-  signUp,
   logout,
   getAllOrders,
 };
