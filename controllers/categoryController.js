@@ -72,6 +72,7 @@ async function edit(req, res) {
 // Update the specified resource in storage.
 async function update(req, res) {
   try {
+    const { id } = req.params;
     const form = formidable({
       multiples: false,
       uploadDir: __dirname + "/../public/img",
@@ -85,7 +86,13 @@ async function update(req, res) {
         image: files.image.newFilename,
       };
 
-      const category = await Category.findByIdAndUpdate(categoryUpdate);
+      const category = await Category.findByPk(id);
+
+      if (!category) {
+        return res.status(404).json({ message: "Category not found" });
+      }
+
+      await category.update(categoryUpdate);
 
       return res.status(200).json(category);
     });
@@ -105,7 +112,7 @@ async function destroy(req, res) {
       return res.status(404).json({ message: "Category not found" });
     }
 
-    // Si elimino una categoría, debería eliminar todos sus productos vinculados ??? (por ahora no se eliminan)
+    // Si elimino una categoría, debería eliminar todos sus productos vinculados ??? (por ahora no se eliminan los productos)
     await category.destroy();
 
     return res.status(204).json({ message: "Category deleted successfully" });
