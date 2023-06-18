@@ -39,13 +39,13 @@ async function signUp(req, res) {
       return res.status(409).json({ message: "Admin already registered" });
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    //const hashedPassword = await bcrypt.hash(password, 10);
 
     const newAdmin = await Admin.create({
       firstname,
       lastname,
       email,
-      password: hashedPassword,
+      password,
     });
 
     return res.status(201).json(newAdmin);
@@ -66,22 +66,20 @@ async function logout(req, res) {
   }
 }
 
-/*async function getAllOrders(req, res) {
+async function getAllOrders(req, res) {
   try {
-    const userId = req.user.userId;
+    const orders = await Order.findAll({
+      include: {
+        model: User,
+      },
+    });
 
-    const user = await User.findByPk(userId, { include: Order });
-
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
-
-    return res.status(200).json({ orders: user.orders });
+    return res.status(200).json({ orders });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: "Internal server error" });
   }
-}*/
+}
 
 // Display a listing of the resource.
 async function index(req, res) {}
@@ -118,5 +116,5 @@ module.exports = {
   login,
   signUp,
   logout,
-  getOrders,
+  getAllOrders,
 };

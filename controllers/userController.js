@@ -43,13 +43,13 @@ async function signUp(req, res) {
       return res.status(409).json({ message: "User already registered" });
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    //const hashedPassword = await bcrypt.hash(password, 10);
 
     const newUser = await User.create({
       firstname,
       lastname,
       email,
-      password: hashedPassword,
+      password,
       address,
       phone,
     });
