@@ -162,6 +162,20 @@ async function destroy(req, res) {
   }
 }
 
+// Featured products
+async function getFeaturedProducts(req, res) {
+  try {
+    const featuredProducts = await Product.findAll({
+      where: { salient: true },
+    });
+
+    return res.status(200).json(featuredProducts);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+}
+
 module.exports = {
   index,
   show,
@@ -170,4 +184,5 @@ module.exports = {
   edit,
   update,
   destroy,
+  getFeaturedProducts,
 };

@@ -122,6 +122,27 @@ async function destroy(req, res) {
   }
 }
 
+// Products by category
+async function getProductsByCategory(req, res) {
+  try {
+    const { categoryId } = req.params;
+
+    const category = await Category.findByPk(categoryId);
+    if (!category) {
+      return res.status(404).json({ message: "Category not found" });
+    }
+
+    const products = await Product.findAll({
+      where: { CategoryId: categoryId },
+    });
+
+    return res.status(200).json(products);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+}
+
 module.exports = {
   index,
   show,
@@ -130,4 +151,5 @@ module.exports = {
   edit,
   update,
   destroy,
+  getProductsByCategory,
 };
