@@ -1,4 +1,4 @@
-const { User, Order } = require("../models/User");
+const { User, Order } = require("../models");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
@@ -42,7 +42,7 @@ async function signUp(req, res) {
       return res.status(409).json({ message: "User already registered" });
     }
 
-    //const hashedPassword = await bcrypt.hash(password, 10);
+    // Dejar el usuario logueado después de generar un User o que haga el logueo pos SignUp (por ahora no) ?
 
     const newUser = await User.create({
       firstname,
