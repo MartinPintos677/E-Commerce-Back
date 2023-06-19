@@ -49,8 +49,5 @@ module.exports = {
   edit,
   update,
   destroy,
-  login,
-  signUp,
-  logout,
   getOrders,
 };

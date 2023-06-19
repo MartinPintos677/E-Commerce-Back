@@ -184,6 +184,7 @@ module.exports = {
   index,
   show,
   create,
+  store,
   edit,
   update,
   destroy,

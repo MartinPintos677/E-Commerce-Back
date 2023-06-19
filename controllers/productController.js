@@ -1,5 +1,9 @@
 const { Product, Category } = require("../models");
-const formidable = require("formidable");
+import("formidable")
+  .then((formidable) => {})
+  .catch((error) => {
+    console.error(error);
+  });
 
 // Display a listing of the resource.
 async function index(req, res) {
