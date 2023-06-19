@@ -18,7 +18,15 @@ async function getOrders(req, res) {
 }
 
 // Display a listing of the resource.
-async function index(req, res) {}
+async function index(req, res) {
+  try {
+    const users = await User.findAll();
+    return res.status(200).json(users);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+}
 
 // Display the specified resource.
 async function show(req, res) {}

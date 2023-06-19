@@ -42,8 +42,31 @@ async function logout(req, res) {
     return res.status(500).json({ message: "Internal server error" });
   }
 }
-
 // SIGN UP
+async function register(req, res) {
+  try {
+    const { firstname, lastname, email, password } = req.body;
+    const existingAdmin = await Admin.findOne({ where: { email } });
+
+    if (existingAdmin) {
+      return res.status(409).json({ message: "Admin already registered" });
+    }
+
+    const newAdmin = await Admin.create({
+      firstname,
+      lastname,
+      email,
+      password,
+    });
+
+    return res.status(201).json(newAdmin);
+  } catch (error) {
+    console.error(error);
+    return res.status(401).json({ message: "Internal server error" });
+  }
+}
+
+// CREAR
 async function store(req, res) {
   try {
     const { firstname, lastname, email, password } = req.body;
@@ -191,4 +214,5 @@ module.exports = {
   getAllOrders,
   login,
   logout,
+  register,
 };

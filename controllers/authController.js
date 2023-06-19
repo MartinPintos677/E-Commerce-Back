@@ -71,8 +71,44 @@ async function logout(req, res) {
   }
 }
 
+async function register(req, res) {
+  try {
+    const existingUser = await User.findOne({ email: req.body.email, username: req.body.username });
+
+    if (existingUser) {
+      return res.status(400).json({ error: "Error 400" });
+    }
+
+    let newUser = null;
+    const form = formidable({
+      multiples: true,
+      uploadDir: __dirname + "/../public/img",
+      keepExtensions: true,
+    });
+
+    form.parse(req, async (err, fields, files) => {
+      console.log({ fields, files });
+      const { firstname, lastname, username, email, password } = fields;
+      const hashedPassword = await bcrypt.hash(password, 8);
+      newUser = new User({
+        firstname,
+        lastname,
+        username,
+        email,
+        password: hashedPassword,
+        avatar: files.avatar.newFilename,
+      });
+      await newUser.save();
+      return res.json(newUser);
+    });
+  } catch (error) {
+    res.status(500).json({ error: "Error 500" });
+  }
+}
+
 module.exports = {
   login,
   signUp,
   logout,
+  register,
 };

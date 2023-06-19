@@ -129,15 +129,15 @@ async function destroy(req, res) {
 // Products by category
 async function getProductsByCategory(req, res) {
   try {
-    const { categoryId } = req.params;
+    const { categoryid } = req.params;
 
-    const category = await Category.findByPk(categoryId);
+    const category = await Category.findByPk(categoryid);
     if (!category) {
       return res.status(404).json({ message: "Category not found" });
     }
 
     const products = await Product.findAll({
-      where: { CategoryId: categoryId },
+      where: { CategoryId: categoryid },
     });
 
     return res.status(200).json(products);

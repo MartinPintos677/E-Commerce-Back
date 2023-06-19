@@ -7,9 +7,9 @@ const categoryController = require("../controllers/categoryController");
 
 router.get("/category", categoryController.index);
 router.get("/category/:id", categoryController.show);
-router.post("/category/features", categoryController.getProductsByCategory);
+router.get("/category/list/:categoryid", categoryController.getProductsByCategory);
 router.post("/category", categoryController.store);
 router.patch("/category", categoryController.update);
-router.delete("/category", categoryController.destroy);
+router.delete("/category/:id", categoryController.destroy);
 
 module.exports = router;

@@ -6,14 +6,14 @@ const adminController = require("../controllers/adminController");
 // ...
 
 router.get("/admin/login", adminController.login);
-router.post("/admin/register", adminController.store); //sign up admin
+router.post("/admin/register", adminController.register); //sign up admin
 router.post("/admin/logout", adminController.logout);
 
 // CRUD ADMIN //
 
 router.get("/admin", adminController.index);
-router.post("/admin", adminController.store);
-router.patch("/admin", adminController.update);
-router.delete("/admin", adminController.destroy);
+router.post("/admin/create", adminController.store);
+router.patch("/admin/edit", adminController.update);
+router.delete("/admin/:id", adminController.destroy);
 
 module.exports = router;
