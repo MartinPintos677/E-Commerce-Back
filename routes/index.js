@@ -6,8 +6,8 @@ const orderRoutes = require("./orderRoutes");
 const productRoutes = require("./productRoutes");
 
 module.exports = (app) => {
-  app.use("/", userRoutes);
   app.use("/", authRoutes);
+  app.use("/", userRoutes);
   app.use("/", adminRoutes);
   app.use("/", categoryRoutes);
   app.use("/", orderRoutes);

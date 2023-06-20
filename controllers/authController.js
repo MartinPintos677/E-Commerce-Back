@@ -3,33 +3,37 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 async function login(req, res) {
+  const { email, password } = req.body;
+  console.log(req.body);
+  console.log("Por aca pasa");
+  const token = (user) => {
+    const token = jwt.sign({ sub: user.id }, process.env.SESSION_SECRET, { expiresIn: "1h" });
+    return token;
+  };
+
   try {
-    const { email, password } = req.body;
-    const user = await User.findOne({ where: { email } });
-
+    const user = await User.findOne({ where: { email: email } });
+    console.log(user.id);
     if (!user) {
-      return res.status(401).json({ message: "Incorrect credentials" });
+      return res.status(404).json({ error: "User not found" });
     }
 
-    if (user) {
-      const isPasswordValid = await bcrypt.compare(password, user.password);
-
-      if (!isPasswordValid) {
-        return res.status(401).json({ message: "Incorrect credentials" });
-      }
-
-      if (isPasswordValid) {
-        const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET_KEY, {
-          expiresIn: "10h",
-        });
-        user._doc.token = token;
-
-        return res.status(201).json(user);
-      }
+    const passwordMatch = await bcrypt.compare(password, user.password);
+    if (!passwordMatch) {
+      return res.status(404).json({ error: "Password not found" });
     }
+    const { firstname, lastname, id } = user;
+    const accessToken = token(user);
+    return res.json({
+      accessToken,
+      firstname,
+      lastname,
+      email,
+      id,
+    });
   } catch (error) {
-    console.error(error);
-    return res.status(401).json({ message: "Internal server error" });
+    console.log(error);
+    res.status(500).json({ error: "Server not found" });
   }
 }
 
