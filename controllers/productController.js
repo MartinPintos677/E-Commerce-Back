@@ -1,9 +1,5 @@
 const { Product, Category } = require("../models");
-import("formidable")
-  .then((formidable) => {})
-  .catch((error) => {
-    console.error(error);
-  });
+const formidable = require("formidable");
 
 // Display a listing of the resource.
 async function index(req, res) {
@@ -53,19 +49,19 @@ async function store(req, res) {
 
     form.parse(req, async (err, fields, files) => {
       const productCreate = {
-        name: fields.name,
-        description: fields.description,
+        name: fields.name.toString(),
+        description: fields.description.toString(),
         image: files.image.newFilename,
         price: fields.price,
         stock: fields.stock,
-        salient: fields.salient,
-        slug: fields.slug,
+        salient: fields.salient.toString(),
+        slug: fields.slug.toString(),
       };
 
       const categoryId = fields.categoryId;
 
       if (categoryId) {
-        const category = await Category.findByPk(categoryId);
+        const category = await Category.findByPk(parseInt(categoryId));
 
         if (!category) {
           return res.status(404).json({ message: "Category not found" });
