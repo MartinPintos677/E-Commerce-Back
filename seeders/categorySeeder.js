@@ -9,22 +9,22 @@ const categoriesData = [
   {
     name: "Espejos",
     description: "Categoría de espejos",
-    image: "espejo5",
+    image: "espejo5.jpg",
   },
   {
     name: "Cuadros",
     description: "Categoría de cuadros",
-    image: "Cuadro1",
+    image: "Cuadro1.jpg",
   },
   {
     name: "Luminarias",
     description: "Categoría de luminarias",
-    image: "Luminaria2",
+    image: "Luminaria2.jpg",
   },
   {
     name: "Tapices",
     description: "Categoría de tapices",
-    image: "Tapiz4",
+    image: "Tapiz4.jpg",
   },
 ];
 
