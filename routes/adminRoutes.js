@@ -5,7 +5,7 @@ const adminController = require("../controllers/adminController");
 // Rutas relacionadas a los admin:
 // ...
 
-router.get("/admin/login", adminController.login);
+router.post("/admin/login", adminController.login);
 router.post("/admin/register", adminController.register); //sign up admin
 router.post("/admin/logout", adminController.logout);
 

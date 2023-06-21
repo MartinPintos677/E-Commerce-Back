@@ -7,26 +7,26 @@ async function login(req, res) {
     const { email, password } = req.body;
     const admin = await Admin.findOne({ where: { email } });
 
-    if (!user) {
-      return res.status(401).json({ message: "Incorrect credentials" });
-    }
+    const token = (admin) => {
+      const token = jwt.sign({ sub: admin.id }, process.env.SESSION_SECRET, { expiresIn: "1h" });
+      return token;
+    };
 
     if (admin) {
       const isPasswordValid = await bcrypt.compare(password, admin.password);
-
       if (!isPasswordValid) {
         return res.status(401).json({ message: "Incorrect credentials" });
       }
-
-      if (isPasswordValid) {
-        const token = jwt.sign({ userId: admin.id }, process.env.JWT_SECRET_KEY, {
-          expiresIn: "10h",
-        });
-        admin._doc.token = token;
-
-        return res.status(201).json(admin);
-      }
     }
+    const { firstname, lastname, id } = admin;
+    const accessToken = token(admin);
+    return res.json({
+      accessToken,
+      firstname,
+      lastname,
+      email,
+      id,
+    });
   } catch (error) {
     console.error(error);
     return res.status(401).json({ message: "Internal server error" });
