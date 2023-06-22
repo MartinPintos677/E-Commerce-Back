@@ -83,8 +83,11 @@ async function update(req, res) {
       const categoryUpdate = {
         name: fields.name,
         description: fields.description,
-        image: files.image.newFilename,
       };
+
+      if (files.image) {
+        categoryUpdate.image = files.image.newFilename;
+      }
 
       const category = await Category.findByPk(id);
 

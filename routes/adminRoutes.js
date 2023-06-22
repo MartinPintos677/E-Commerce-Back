@@ -12,8 +12,9 @@ router.post("/admin/logout", adminController.logout);
 // CRUD ADMIN //
 
 router.get("/admin", adminController.index);
+router.get("/admin/:id", adminController.show);
 router.post("/admin/create", adminController.store);
-router.patch("/admin/edit", adminController.update);
+router.patch("/admin/:id", adminController.update);
 router.delete("/admin/:id", adminController.destroy);
 
 module.exports = router;

@@ -104,7 +104,6 @@ async function update(req, res) {
       const productUpdate = {
         name: fields.name,
         description: fields.description,
-        //image: files.image.newFilename,
         price: fields.price,
         stock: fields.stock,
         salient: fields.salient,
