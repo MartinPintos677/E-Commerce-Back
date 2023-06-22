@@ -171,7 +171,7 @@ async function update(req, res) {
     admin.firstname = firstname;
     admin.lastname = lastname;
     admin.email = email;
-    admin.password = await bcrypt.hash(password, 10);
+    admin.password = password;
 
     await admin.save();
 
