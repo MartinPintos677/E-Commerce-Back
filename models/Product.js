@@ -15,7 +15,7 @@ class Product extends Model {
           required: true,
         },
         description: {
-          type: DataTypes.STRING,
+          type: DataTypes.TEXT,
           required: true,
         },
         image: {
