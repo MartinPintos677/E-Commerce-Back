@@ -104,12 +104,16 @@ async function update(req, res) {
       const productUpdate = {
         name: fields.name,
         description: fields.description,
-        image: files.image.newFilename,
+        //image: files.image.newFilename,
         price: fields.price,
         stock: fields.stock,
         salient: fields.salient,
         slug: fields.slug,
       };
+
+      if (files.image) {
+        productUpdate.image = files.image.newFilename;
+      }
 
       const categoryId = fields.categoryId;
 
