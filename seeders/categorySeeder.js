@@ -14,7 +14,7 @@ const categoriesData = [
   {
     name: "Cuadros",
     description: "Categoría de cuadros",
-    image: "Cuadro1.jpg",
+    image: "Cuadro1.png",
   },
   {
     name: "Luminarias",

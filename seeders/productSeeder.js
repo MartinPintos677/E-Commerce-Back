@@ -68,7 +68,7 @@ const productsCuadrosData = [
     stock: 20,
     salient: false,
     slug: "cuadro-rectangular",
-    image: "Cuadro2.jpg",
+    image: "Cuadro2.png",
   },
   {
     name: "Cuadros",
@@ -77,7 +77,7 @@ const productsCuadrosData = [
     stock: 5,
     salient: false,
     slug: "cuadros-modernos",
-    image: "Cuadro3.jpg",
+    image: "Cuadro3.png",
   },
   {
     name: "Cuadro abstracto",
@@ -86,7 +86,7 @@ const productsCuadrosData = [
     stock: 5,
     salient: true,
     slug: "cuadro-abstracto-colores-vivos",
-    image: "Cuadro1.jpg",
+    image: "Cuadro1.png",
   },
 ];
 
