@@ -32,12 +32,6 @@ async function show(req, res) {
   }
 }
 
-// Show the form for creating a new resource.
-async function create(req, res) {
-  // Poner la ruta para crear Producto ?
-  return res.render("product.create.ruta");
-}
-
 // Store a newly created resource in storage.
 async function store(req, res) {
   try {
@@ -82,12 +76,6 @@ async function store(req, res) {
     console.error(error);
     return res.status(500).json({ message: "Internal server error" });
   }
-}
-
-// Show the form for editing the specified resource.
-async function edit(req, res) {
-  // Ruta para update ?
-  return res.render("product.edit.ruta");
 }
 
 // Update the specified resource in storage.
@@ -182,9 +170,7 @@ async function getFeaturedProducts(req, res) {
 module.exports = {
   index,
   show,
-  create,
   store,
-  edit,
   update,
   destroy,
   getFeaturedProducts,
