@@ -32,12 +32,6 @@ async function show(req, res) {
   }
 }
 
-// Show the form for creating a new resource.
-async function create(req, res) {
-  // Poner la ruta para crear Categoría ?
-  return res.render("category.create.ruta");
-}
-
 // Store a newly created resource in storage.
 async function store(req, res) {
   try {
@@ -61,12 +55,6 @@ async function store(req, res) {
     console.error(error);
     return res.status(500).json({ message: "Internal server error" });
   }
-}
-
-// Show the form for editing the specified resource.
-async function edit(req, res) {
-  // Ruta para update ?
-  return res.render("category.edit.ruta");
 }
 
 // Update the specified resource in storage.
@@ -115,7 +103,6 @@ async function destroy(req, res) {
       return res.status(404).json({ message: "Category not found" });
     }
 
-    // Si elimino una categoría, debería eliminar todos sus productos vinculados ??? (por ahora no se eliminan los productos)
     await category.destroy();
 
     return res.status(204).json({ message: "Category deleted successfully" });
@@ -149,9 +136,7 @@ async function getProductsByCategory(req, res) {
 module.exports = {
   index,
   show,
-  create,
   store,
-  edit,
   update,
   destroy,
   getProductsByCategory,

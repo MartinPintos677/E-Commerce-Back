@@ -67,30 +67,6 @@ async function register(req, res) {
   }
 }
 
-// CREAR
-async function store(req, res) {
-  try {
-    const { firstname, lastname, email, password } = req.body;
-    const existingAdmin = await Admin.findOne({ where: { email } });
-
-    if (existingAdmin) {
-      return res.status(409).json({ message: "Admin already registered" });
-    }
-
-    const newAdmin = await Admin.create({
-      firstname,
-      lastname,
-      email,
-      password,
-    });
-
-    return res.status(201).json(newAdmin);
-  } catch (error) {
-    console.error(error);
-    return res.status(401).json({ message: "Internal server error" });
-  }
-}
-
 async function getAllOrders(req, res) {
   try {
     const orders = await Order.findAll({
@@ -132,12 +108,6 @@ async function show(req, res) {
     console.error(error);
     return res.status(500).json({ message: "Internal server error" });
   }
-}
-
-// Show the form for creating a new resource
-async function create(req, res) {
-  // ir a la Ruta de SignUp ?
-  return res.render("admin.create.ruta");
 }
 
 // Show the form for editing the specified resource.
@@ -201,14 +171,9 @@ async function destroy(req, res) {
   }
 }
 
-// Otros handlers...
-// ...
-
 module.exports = {
   index,
   show,
-  create,
-  store,
   edit,
   update,
   destroy,
