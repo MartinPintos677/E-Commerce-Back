@@ -69,7 +69,8 @@ const productsEspejosData = [
 const productsCuadrosData = [
   {
     name: "Cuadro rectangular",
-    description: "Cuadro rectangular",
+    description:
+      "Cuadro rectangular de diseño contemporáneo que aporta arte y estilo a tus paredes. Sus formas y colores cautivan la mirada, creando un punto focal en cualquier habitación. Perfecto para decorar salas, dormitorios u oficinas, este cuadro añade personalidad y sofisticación a tus espacios, convirtiéndolos en lugares inspiradores y llenos de encanto.",
     price: 79.99,
     stock: 20,
     salient: false,
