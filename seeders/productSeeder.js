@@ -127,7 +127,7 @@ const productsLuminariasData = [
     stock: 5,
     salient: true,
     slug: "cuadro-abstracto-colores-vivos",
-    image: "Cuadro1.jpg",
+    image: "Luminaria3.jpg",
   },
 ];
 
