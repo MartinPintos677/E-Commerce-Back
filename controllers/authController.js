@@ -20,12 +20,13 @@ async function login(req, res) {
     if (!passwordMatch) {
       return res.status(404).json({ error: "Password not found" });
     }
-    const { firstname, lastname, id } = user;
+    const { firstname, lastname, id, address } = user;
     const accessToken = token(user);
     return res.json({
       accessToken,
       firstname,
       lastname,
+      address,
       email,
       id,
     });
