@@ -10,11 +10,12 @@ async function createOrder(req, res) {
     }
 
     const order = await Order.create({
-      userId,
       products,
       state,
       address,
     });
+
+    await order.setUser(user);
 
     return res.status(200).json(order);
   } catch (error) {
