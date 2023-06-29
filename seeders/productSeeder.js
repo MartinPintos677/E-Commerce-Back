@@ -2,14 +2,14 @@ const { Product, Category } = require("../models");
 
 const productsMueblesData = [
   {
-    name: "Silla",
+    name: "Silla Honguito",
     description:
-      "Silla de comedor de diseño contemporáneo, con estructura robusta y acabado en madera, brindando comodidad y elegancia a tus reuniones familiares y cenas con amigos. Su respaldo ergonómico y asiento acolchado garantizan una experiencia confortable, mientras que su estilo versátil combina fácilmente con cualquier decoración de comedor. La silla perfecta para disfrutar de momentos inolvidables alrededor de la mesa.",
+      "Silla de comedor de diseño contemporáneo, con estructura robusta y acabado en mimbre, brindando comodidad y elegancia a tus reuniones familiares y cenas con amigos. Su respaldo ergonómico garantiza una experiencia confortable, mientras que su estilo versátil combina fácilmente con cualquier decoración de comedor. La silla perfecta para disfrutar de momentos inolvidables alrededor de la mesa.",
     price: 99.99,
     stock: 10,
     salient: false,
     slug: "silla-de-comedor",
-    image: "Mueble4.jpg",
+    image: "MueblesFinal6.jpeg",
   },
   {
     name: "Sillón",
@@ -19,7 +19,7 @@ const productsMueblesData = [
     stock: 6,
     salient: false,
     slug: "silla-de-comedor",
-    image: "Mueble5.jpg",
+    image: "MueblesFinal7.jpeg",
   },
   {
     name: "Silla Alta",
@@ -29,7 +29,7 @@ const productsMueblesData = [
     stock: 10,
     salient: true,
     slug: "silla-alta",
-    image: "Mueble2.jpg",
+    image: "MueblesFinal4.jpeg",
   },
 ];
 
@@ -62,7 +62,7 @@ const productsEspejosData = [
     stock: 5,
     salient: true,
     slug: "espejo-grande-marco-dorado",
-    image: "Espejo5.jpg",
+    image: "EspejosFinal4.jpeg",
   },
 ];
 
@@ -75,7 +75,7 @@ const productsCuadrosData = [
     stock: 20,
     salient: false,
     slug: "cuadro-rectangular",
-    image: "Cuadro2.png",
+    image: "CuadrosFinal2.jpeg",
   },
   {
     name: "Cuadros",
@@ -95,7 +95,7 @@ const productsCuadrosData = [
     stock: 5,
     salient: true,
     slug: "cuadro-abstracto-colores-vivos",
-    image: "Cuadro1.png",
+    image: "CuadrosFinal1.jpeg",
   },
 ];
 
@@ -108,7 +108,7 @@ const productsLuminariasData = [
     stock: 15,
     salient: false,
     slug: "lampara-de-techo",
-    image: "Luminaria2.jpg",
+    image: "LuminariaFinal1.jpeg",
   },
   {
     name: "Lámparas de techo",
@@ -118,7 +118,7 @@ const productsLuminariasData = [
     stock: 5,
     salient: false,
     slug: "lamparas-techo-chicas",
-    image: "Luminaria5.jpg",
+    image: "LuminariaFinal2.jpeg",
   },
   {
     name: "Lámpara de techo",
@@ -127,8 +127,8 @@ const productsLuminariasData = [
     price: 149.99,
     stock: 5,
     salient: true,
-    slug: "cuadro-abstracto-colores-vivos",
-    image: "Luminaria3.jpg",
+    slug: "lampara-techo-tejido",
+    image: "LuminariaFinal3.jpeg",
   },
 ];
 
@@ -141,7 +141,7 @@ const productsTapicesData = [
     stock: 8,
     salient: false,
     slug: "tapiz-decorativo",
-    image: "Tapiz5.jpg",
+    image: "TapizFinal1.jpeg",
   },
   {
     name: "Tapiz",
@@ -151,7 +151,7 @@ const productsTapicesData = [
     stock: 5,
     salient: true,
     slug: "tapiz-blanco",
-    image: "Tapiz4.jpg",
+    image: "TapizFinal2.jpeg",
   },
   {
     name: "Tapiz moderno",
@@ -161,7 +161,7 @@ const productsTapicesData = [
     stock: 5,
     salient: false,
     slug: "tapiz-moderno-blanco",
-    image: "Tapiz1.jpg",
+    image: "TapizFinal3.jpeg",
   },
 ];
 
