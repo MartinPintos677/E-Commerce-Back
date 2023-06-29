@@ -128,7 +128,7 @@ const productsLuminariasData = [
     stock: 5,
     salient: true,
     slug: "lampara-techo-tejido",
-    image: "LuminariaFinal3.jpeg",
+    image: "LuminariasFinal3.jpeg",
   },
 ];
 
