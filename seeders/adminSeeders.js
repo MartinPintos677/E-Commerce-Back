@@ -29,6 +29,13 @@ const admins = [
     address: "Av 18 de julio 1434",
     password: "123",
   },
+  {
+    firstname: "Admin",
+    lastname: "Admin",
+    email: "Admin@admin.com",
+    address: "Direccion de prueba admin",
+    password: "123",
+  },
 ];
 
 const seedAdmin = async () => {

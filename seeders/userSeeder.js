@@ -33,6 +33,14 @@ const users = [
     phone: 789654123,
     password: "123",
   },
+  {
+    firstname: "User",
+    lastname: "Name",
+    email: "User@user.com",
+    address: "Avenida Mesopotamia Esquina Valhalla",
+    phone: 1122,
+    password: "123",
+  },
 ];
 
 const seedUsers = async () => {
