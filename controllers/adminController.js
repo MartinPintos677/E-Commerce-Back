@@ -1,4 +1,4 @@
-const { Admin, Order } = require("../models");
+const { Admin, Order, User } = require("../models");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
@@ -75,7 +75,7 @@ async function getAllOrders(req, res) {
       },
     });
 
-    return res.status(200).json({ orders });
+    return res.status(200).json(orders);
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: "Internal server error" });
