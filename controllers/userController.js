@@ -2,8 +2,7 @@ const { User, Order } = require("../models");
 
 async function getOrders(req, res) {
   try {
-    const userId = req.user.userId;
-
+    const userId = req.params.id;
     const user = await User.findByPk(userId, { include: Order });
 
     if (!user) {

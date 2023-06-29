@@ -8,9 +8,9 @@ class Order extends Model {
           type: DataTypes.JSON,
         },
         state: {
-          type: DataTypes.ENUM("sin pagar", "pago", "enviado", "entregado"),
+          type: DataTypes.ENUM("Sin pagar", "Pago", "Enviado", "Entregado"),
           allowNull: false,
-          defaultValue: "sin pagar",
+          defaultValue: "Sin pagar",
         },
         address: {
           type: DataTypes.STRING,
@@ -23,6 +23,10 @@ class Order extends Model {
     );
 
     return Order;
+  }
+
+  static associate(models) {
+    Order.belongsTo(models.User, { foreignKey: "UserId" });
   }
 }
 

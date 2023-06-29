@@ -22,6 +22,7 @@ Admin.initModel(sequelize);
 Category.initModel(sequelize);
 Product.initModel(sequelize);
 Order.initModel(sequelize);
+Order.associate({ User });
 
 // Relación 1 a N: Category tiene una relación 1 a N con Product
 Category.hasMany(Product);
