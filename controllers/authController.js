@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 async function login(req, res) {
   const { email, password } = req.body;
   const token = (user) => {
-    const token = jwt.sign({ sub: user.id }, process.env.SESSION_SECRET, { expiresIn: "1h" });
+    const token = jwt.sign({ sub: user.id }, process.env.JWT_SECRET_KEY, { expiresIn: "1h" });
     return token;
   };
 
@@ -22,6 +22,7 @@ async function login(req, res) {
     }
     const { firstname, lastname, id, address } = user;
     const accessToken = token(user);
+    console.log(accessToken);
     return res.json({
       accessToken,
       firstname,
