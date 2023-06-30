@@ -4,10 +4,10 @@ const jwt = require("jsonwebtoken");
 
 async function login(req, res) {
   const { email, password } = req.body;
-  const token = (user) => {
-    const token = jwt.sign({ sub: user.id }, process.env.JWT_SECRET_KEY, { expiresIn: "1h" });
-    return token;
-  };
+  // const token = (user) => {
+  //   const token = jwt.sign({ sub: user.id }, process.env.JWT_SECRET_KEY, { expiresIn: "1h" });
+  //   return token;
+  // };
 
   try {
     const user = await User.findOne({ where: { email: email } });
@@ -21,7 +21,7 @@ async function login(req, res) {
       return res.status(404).json({ error: "Password not found" });
     }
     const { firstname, lastname, id, address } = user;
-    const accessToken = token(user);
+    const accessToken = jwt.sign({ sub: user.id }, process.env.JWT_SECRET_KEY);
     console.log(accessToken);
     return res.json({
       accessToken,
