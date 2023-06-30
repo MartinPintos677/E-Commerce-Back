@@ -30,6 +30,7 @@ async function createOrder(req, res) {
       products,
       state,
       address,
+      UserId: userId,
     });
 
     await order.setUser(user);

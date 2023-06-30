@@ -25,9 +25,9 @@ class Order extends Model {
     return Order;
   }
 
-  static associate(models) {
-    Order.belongsTo(models.User, { foreignKey: "UserId" });
-  }
+  // static associate(models) {
+  //   Order.belongsTo(models.User, { foreignKey: "UserId" });
+  // }
 }
 
 module.exports = Order;
