@@ -33,7 +33,7 @@ async function createOrder(req, res) {
       UserId: userId,
     });
 
-    await order.setUser(user);
+    // await order.setUser(user);
 
     return res.status(200).json(order);
   } catch (error) {
