@@ -7,10 +7,10 @@ async function login(req, res) {
     const { email, password } = req.body;
     const admin = await Admin.findOne({ where: { email } });
 
-    const token = (admin) => {
-      const token = jwt.sign({ sub: admin.id }, process.env.SESSION_SECRET, { expiresIn: "1h" });
-      return token;
-    };
+    // const token = (admin) => {
+    //   const token = jwt.sign({ sub: admin.id }, process.env.SESSION_SECRET, { expiresIn: "1h" });
+    //   return token;
+    // };
 
     if (admin) {
       const isPasswordValid = await bcrypt.compare(password, admin.password);
@@ -19,7 +19,7 @@ async function login(req, res) {
       }
     }
     const { firstname, lastname, id } = admin;
-    const accessToken = token(admin);
+    const accessToken = jwt.sign({ sub: admin.id }, process.env.SESSION_SECRET);
     return res.json({
       accessToken,
       firstname,
