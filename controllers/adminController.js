@@ -19,7 +19,7 @@ async function login(req, res) {
       }
     }
     const { firstname, lastname, id } = admin;
-    const accessToken = jwt.sign({ sub: admin.id }, process.env.SESSION_SECRET);
+    const accessToken = jwt.sign({ sub: admin.id }, process.env.JWT_SECRET_KEY);
     return res.json({
       accessToken,
       firstname,
