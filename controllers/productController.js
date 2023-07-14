@@ -4,6 +4,14 @@ const formidable = require("formidable");
 const fs = require("fs");
 const path = require("path");
 
+const { createClient } = require("@supabase/supabase-js");
+
+// Crea una instancia de cliente de Supabase
+const supabase = createClient(
+  "https://ywddjkekovjltneirvor.supabase.co",
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl3ZGRqa2Vrb3ZqbHRuZWlydm9yIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTY4ODEyODk2OCwiZXhwIjoyMDAzNzA0OTY4fQ.HvfC1z4oS8BpD_Hno6PLtCUyM4rpJzrQRe53isvtNSw",
+);
+
 // Display a listing of the resource.
 async function index(req, res) {
   try {
