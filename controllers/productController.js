@@ -1,6 +1,9 @@
 const { Product, Category } = require("../models");
 const formidable = require("formidable");
 
+const fs = require("fs");
+const path = require("path");
+
 // Display a listing of the resource.
 async function index(req, res) {
   try {
@@ -33,7 +36,7 @@ async function show(req, res) {
 }
 
 // Store a newly created resource in storage.
-async function store(req, res) {
+/*async function store(req, res) {
   try {
     const form = formidable({
       multiples: false,
@@ -46,6 +49,71 @@ async function store(req, res) {
         name: fields.name.toString(),
         description: fields.description.toString(),
         image: files.image.newFilename,
+        price: fields.price,
+        stock: fields.stock,
+        salient: fields.salient.toString(),
+        slug: fields.slug.toString(),
+      };
+
+      const categoryId = fields.categoryId;
+
+      if (categoryId) {
+        const category = await Category.findByPk(parseInt(categoryId));
+
+        if (!category) {
+          return res.status(404).json({ message: "Category not found" });
+        }
+
+        const product = await Product.create(productCreate);
+        await product.setCategory(category);
+
+        return res.status(200).json(product);
+      }
+
+      // Si no se proporcionó una categoría, crear solo el producto sin asignar una categoría
+      const product = await Product.create(productCreate);
+
+      return res.status(200).json(product);
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+}*/
+
+async function store(req, res) {
+  try {
+    const form = formidable({
+      multiples: true,
+      keepExtensions: true,
+    });
+
+    form.parse(req, async (err, fields, files) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ message: "Internal server error" });
+      }
+
+      const ext = path.extname(files.image.filepath);
+      const newFileName = `image_${Date.now()}${ext}`;
+
+      const { data, error } = await supabase.storage
+        .from("images")
+        .upload(newFileName, fs.createReadStream(files.image.filepath), {
+          cacheControl: "3600",
+          upsert: false,
+          contentType: files.image.mimetype,
+        });
+
+      if (error) {
+        console.error(error);
+        return res.status(500).json({ message: "Internal server error" });
+      }
+
+      const productCreate = {
+        name: fields.name.toString(),
+        description: fields.description.toString(),
+        image: data.Key,
         price: fields.price,
         stock: fields.stock,
         salient: fields.salient.toString(),
