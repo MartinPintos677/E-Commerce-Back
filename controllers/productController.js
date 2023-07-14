@@ -35,21 +35,17 @@ async function show(req, res) {
 // Store a newly created resource in storage.
 async function store(req, res) {
   try {
-    const form = new formidable.IncomingForm();
-    form.multiples = false;
-    form.uploadDir = __dirname + "/../public/img";
-    form.keepExtensions = true;
+    const form = formidable({
+      multiples: false,
+      uploadDir: __dirname + "/../public/img",
+      keepExtensions: true,
+    });
 
     form.parse(req, async (err, fields, files) => {
-      if (err) {
-        console.error(err);
-        return res.status(500).json({ message: "Error parsing form data" });
-      }
-
       const productCreate = {
         name: fields.name.toString(),
         description: fields.description.toString(),
-        image: files.image ? files.image.name : "", // Obtén el nombre del archivo subido si existe
+        image: files.image.newFilename,
         price: fields.price,
         stock: fields.stock,
         salient: fields.salient.toString(),
