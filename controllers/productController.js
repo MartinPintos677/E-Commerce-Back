@@ -113,7 +113,7 @@ async function store(req, res) {
       const productCreate = {
         name: fields.name.toString(),
         description: fields.description.toString(),
-        image: data.Key,
+        image: files.image.newFilename,
         price: fields.price,
         stock: fields.stock,
         salient: fields.salient.toString(),
