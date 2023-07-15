@@ -91,8 +91,8 @@ async function store(req, res) {
       }
 
       const categoryCreate = {
-        name: fields.name,
-        description: fields.description,
+        name: fields.name.toString(),
+        description: fields.description.toString(),
         image: newFileName,
       };
 
