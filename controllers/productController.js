@@ -151,7 +151,7 @@ async function store(req, res) {
 }
 
 // Update the specified resource in storage.
-async function update(req, res) {
+/*async function update(req, res) {
   try {
     const { id } = req.params;
     const form = formidable({
@@ -196,6 +196,89 @@ async function update(req, res) {
       }
 
       // Si no se proporcionó una categoría, actualizar solo los campos del producto sin cambiar la categoría
+      await product.update(productUpdate);
+
+      return res.status(200).json(product);
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+}*/
+
+async function update(req, res) {
+  try {
+    const form = formidable({
+      multiples: true,
+      keepExtensions: true,
+    });
+
+    form.parse(req, async (err, fields, files) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ message: "Internal server error" });
+      }
+
+      const productId = req.params.id;
+
+      const productUpdate = {
+        name: fields.name.toString(),
+        description: fields.description.toString(),
+        price: fields.price,
+        stock: fields.stock,
+        salient: fields.salient.toString(),
+        slug: fields.slug.toString(),
+      };
+
+      if (files.image) {
+        const ext = path.extname(files.image.filepath);
+        const newFileName = `image_${Date.now()}${ext}`;
+
+        const { data, error } = await supabase.storage
+          .from("images")
+          .upload(newFileName, fs.createReadStream(files.image.filepath), {
+            cacheControl: "3600",
+            upsert: false,
+            contentType: files.image.mimetype,
+            duplex: "half",
+          });
+
+        if (error) {
+          console.error(error);
+          return res.status(500).json({ message: "Internal server error" });
+        }
+
+        productUpdate.image = newFileName;
+      }
+
+      const categoryId = fields.categoryId;
+
+      if (categoryId) {
+        const category = await Category.findByPk(parseInt(categoryId));
+
+        if (!category) {
+          return res.status(404).json({ message: "Category not found" });
+        }
+
+        const product = await Product.findByPk(productId);
+
+        if (!product) {
+          return res.status(404).json({ message: "Product not found" });
+        }
+
+        await product.update(productUpdate);
+        await product.setCategory(category);
+
+        return res.status(200).json(product);
+      }
+
+      // Si no se proporcionó una categoría, actualizar solo los campos del producto sin cambiar la categoría
+      const product = await Product.findByPk(productId);
+
+      if (!product) {
+        return res.status(404).json({ message: "Product not found" });
+      }
+
       await product.update(productUpdate);
 
       return res.status(200).json(product);
