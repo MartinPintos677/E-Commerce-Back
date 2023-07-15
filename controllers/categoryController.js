@@ -1,6 +1,9 @@
 const { Category, Product } = require("../models");
 const formidable = require("formidable");
 
+const fs = require("fs");
+const path = require("path");
+
 const { createClient } = require("@supabase/supabase-js");
 const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY);
 
