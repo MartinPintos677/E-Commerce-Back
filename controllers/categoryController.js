@@ -33,7 +33,7 @@ async function show(req, res) {
 }
 
 // Store a newly created resource in storage.
-async function store(req, res) {
+/*async function store(req, res) {
   try {
     const form = formidable({
       multiples: false,
@@ -46,6 +46,51 @@ async function store(req, res) {
         name: fields.name,
         description: fields.description,
         image: files.image.newFilename,
+      };
+
+      const category = await Category.create(categoryCreate);
+      return res.status(200).json(category);
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+}*/
+
+async function store(req, res) {
+  try {
+    const form = formidable({
+      multiples: true,
+      keepExtensions: true,
+    });
+
+    form.parse(req, async (err, fields, files) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ message: "Internal server error" });
+      }
+
+      const ext = path.extname(files.image.filepath);
+      const newFileName = `image_${Date.now()}${ext}`;
+
+      const { data, error } = await supabase.storage
+        .from("images")
+        .upload(newFileName, fs.createReadStream(files.image.filepath), {
+          cacheControl: "3600",
+          upsert: false,
+          contentType: files.image.mimetype,
+          duplex: "half",
+        });
+
+      if (error) {
+        console.error(error);
+        return res.status(500).json({ message: "Internal server error" });
+      }
+
+      const categoryCreate = {
+        name: fields.name,
+        description: fields.description,
+        image: newFileName,
       };
 
       const category = await Category.create(categoryCreate);
