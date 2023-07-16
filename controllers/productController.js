@@ -39,51 +39,6 @@ async function show(req, res) {
 }
 
 // Store a newly created resource in storage.
-/*async function store(req, res) {
-  try {
-    const form = formidable({
-      multiples: false,
-      uploadDir: __dirname + "/../public/img",
-      keepExtensions: true,
-    });
-
-    form.parse(req, async (err, fields, files) => {
-      const productCreate = {
-        name: fields.name.toString(),
-        description: fields.description.toString(),
-        image: files.image.newFilename,
-        price: fields.price,
-        stock: fields.stock,
-        salient: fields.salient.toString(),
-        slug: fields.slug.toString(),
-      };
-
-      const categoryId = fields.categoryId;
-
-      if (categoryId) {
-        const category = await Category.findByPk(parseInt(categoryId));
-
-        if (!category) {
-          return res.status(404).json({ message: "Category not found" });
-        }
-
-        const product = await Product.create(productCreate);
-        await product.setCategory(category);
-
-        return res.status(200).json(product);
-      }
-
-      // Si no se proporcionó una categoría, crear solo el producto sin asignar una categoría
-      const product = await Product.create(productCreate);
-
-      return res.status(200).json(product);
-    });
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({ message: "Internal server error" });
-  }
-}*/
-
 async function store(req, res) {
   try {
     const form = formidable({
@@ -151,61 +106,6 @@ async function store(req, res) {
 }
 
 // Update the specified resource in storage.
-/*async function update(req, res) {
-  try {
-    const { id } = req.params;
-    const form = formidable({
-      multiples: false,
-      uploadDir: __dirname + "/../public/img",
-      keepExtensions: true,
-    });
-
-    form.parse(req, async (err, fields, files) => {
-      const productUpdate = {
-        name: fields.name,
-        description: fields.description,
-        price: fields.price,
-        stock: fields.stock,
-        salient: fields.salient,
-        slug: fields.slug,
-      };
-
-      if (files.image) {
-        productUpdate.image = files.image.newFilename;
-      }
-
-      const categoryId = fields.categoryId;
-
-      const product = await Product.findByPk(id);
-
-      if (!product) {
-        return res.status(404).json({ message: "Product not found" });
-      }
-
-      if (categoryId) {
-        const category = await Category.findByPk(categoryId);
-
-        if (!category) {
-          return res.status(404).json({ message: "Category not found" });
-        }
-
-        await product.update(productUpdate);
-        await product.setCategory(category);
-
-        return res.status(200).json(product);
-      }
-
-      // Si no se proporcionó una categoría, actualizar solo los campos del producto sin cambiar la categoría
-      await product.update(productUpdate);
-
-      return res.status(200).json(product);
-    });
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({ message: "Internal server error" });
-  }
-}*/
-
 async function update(req, res) {
   try {
     const form = formidable({

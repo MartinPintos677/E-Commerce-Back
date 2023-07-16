@@ -39,30 +39,6 @@ async function show(req, res) {
 }
 
 // Store a newly created resource in storage.
-/*async function store(req, res) {
-  try {
-    const form = formidable({
-      multiples: false,
-      uploadDir: __dirname + "/../public/img",
-      keepExtensions: true,
-    });
-
-    form.parse(req, async (err, fields, files) => {
-      const categoryCreate = {
-        name: fields.name,
-        description: fields.description,
-        image: files.image.newFilename,
-      };
-
-      const category = await Category.create(categoryCreate);
-      return res.status(200).json(category);
-    });
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({ message: "Internal server error" });
-  }
-}*/
-
 async function store(req, res) {
   try {
     const form = formidable({
@@ -107,42 +83,6 @@ async function store(req, res) {
     return res.status(500).json({ message: "Internal server error" });
   }
 }
-
-// Update the specified resource in storage.
-/*async function update(req, res) {
-  try {
-    const { id } = req.params;
-    const form = formidable({
-      multiples: false,
-      uploadDir: __dirname + "/../public/img",
-      keepExtensions: true,
-    });
-
-    form.parse(req, async (err, fields, files) => {
-      const categoryUpdate = {
-        name: fields.name,
-        description: fields.description,
-      };
-
-      if (files.image) {
-        categoryUpdate.image = files.image.newFilename;
-      }
-
-      const category = await Category.findByPk(id);
-
-      if (!category) {
-        return res.status(404).json({ message: "Category not found" });
-      }
-
-      await category.update(categoryUpdate);
-
-      return res.status(200).json(category);
-    });
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({ message: "Internal server error" });
-  }
-}*/
 
 async function update(req, res) {
   try {
